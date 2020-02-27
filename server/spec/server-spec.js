@@ -10,13 +10,14 @@ describe('Persistent Node Chat Server', function () {
 
   beforeEach(function (done) {
     dbConnection = mysql.createConnection({
+      host: 'localhost', //CHANGED TEST HERE to match mysql docs, caused err in tests
       user: 'student',
       password: 'student',
       database: 'chat'
     });
     dbConnection.connect();
 
-    var tablename = 'messages'; // TODO: fill this out
+    var tablename = 'messages'; // done TODO: fill this out
 
     /* Empty the db table before each test so that multiple tests
      * (or repeated runs of the tests) won't screw each other up: */
@@ -29,12 +30,14 @@ describe('Persistent Node Chat Server', function () {
 
   it('Should insert posted messages to the DB', function (done) {
     // Post the user to the chat server.
+    console.log('I\'m a POST request!'); //delete this
     request({
       method: 'POST',
       uri: 'http://127.0.0.1:3000/classes/users',
       json: { username: 'Valjean' }
     }, function () {
       // Post a message to the node chat server:
+      console.log('I\'m a second POST request!'); //delete this
       request({
         method: 'POST',
         uri: 'http://127.0.0.1:3000/classes/messages',
@@ -44,10 +47,11 @@ describe('Persistent Node Chat Server', function () {
           roomname: 'Hello'
         }
       }, function () {
+        console.log('I\'m a callback request!');
         // Now if we look in the database, we should find the
         // posted message there.
 
-        // TODO: You might have to change this test to get all the data from
+        // done TODO: You might have to change this test to get all the data from
         // your message table, since this is schema-dependent.
         var queryString = 'SELECT * FROM messages';
         // CHANGED grab all columns from messages

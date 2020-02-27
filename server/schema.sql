@@ -1,6 +1,10 @@
+DROP DATABASE IF EXISTS chat;
+
 CREATE DATABASE chat;
 
 USE chat;
+
+DROP TABLE IF EXISTS messages;
 
 CREATE TABLE messages (
   /* Entity for messages - holds a UUID, message text, room name, and user's UUID*/
@@ -12,13 +16,13 @@ CREATE TABLE messages (
 );
 
 /* Create other tables and define schemas for them here! */
--- CREATE TABLE users (
---   /* Entity for users - holds a UUID, username */
---   id INT(100) NOT NULL AUTO_INCREMENT,
---   userid INT(10),
---   username varchar(15),
---   Primary KEY (id)
--- );
+CREATE TABLE users (
+  /* Entity for users - holds a UUID, username */
+  id INT NOT NULL AUTO_INCREMENT,
+  userid INT,
+  username varchar(15),
+  Primary KEY (id)
+);
 
 -- CREATE TABLE rooms (
 --   /* Entity for messages - holds a UUID, message text, room name, and user's UUID*/
