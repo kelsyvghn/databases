@@ -8,6 +8,7 @@ module.exports = {
     get: function (req, res) {}, // a function which handles a get request for all messages
     post: function (req, res) {
       console.log('this is from messages post!');
+      console.log('here is the request!', req);
       res.end();
       //grab info out of req header (req.property)
       //send 200 back in res (message received)
@@ -19,9 +20,9 @@ module.exports = {
     // Ditto as above
     get: function (req, res) {},
     post: function (req, res) {
-      console.log('controller post');
-      var userObj = req.json;
-      models.users.post(userObj, () => { console.log('controller\'s callback'); });
+      console.log('controller post', req.body.username);
+      var userObj = req.body.username;
+      models.users.post(userObj, (error, results, field) => { console.log('callback from users post query: ', error, results, field); });
       res.end('username received');
     }
   }

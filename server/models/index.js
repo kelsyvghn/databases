@@ -1,6 +1,6 @@
 var db = require('../db');
 
-var userhash = (string) => {
+var userhash = (string) => { //quick hash function for creating hashes of usernames.
   var hash = 0;
   if (string.length === 0) {
     return hash;
@@ -25,15 +25,15 @@ module.exports = {
   users: {
     // Ditto as above.
     get: function () {},
-    post: function (JSONObj, callback) {
+    post: function (username, callback) {
       //receive JSON object with username property - handled in params
       //send JSON.username to database
-      console.log('model post');
-      var post = JSONObj;
-      var usernamehash = userhash(JSONObj.username);
-      db.query(`INSERT INTO users (userid, username) VALUES (${usernamehash}, ${JSONObj.username}`);
-      callback(err, data);
-      res.end('end of model user post');
+      var usernamehash = userhash(username);
+      console.log('model post', username, usernamehash); //getting this far!
+      var querystring = `INSERT INTO users (userid, username) VALUES ('${usernamehash}', '${username}')`;
+      console.log(querystring);
+      db.query(querystring, callback);
+      // res.end('end of model user post');
     }
   }
 };

@@ -15,11 +15,13 @@ CREATE TABLE messages (
   Primary KEY (id)
 );
 
-/* Create other tables and define schemas for them here! */
+/* Create other tables and define schemas for them here!
+hashes of 32bit numbers tend to be 10+ digits, close to limit of INT
+*/
 CREATE TABLE users (
   /* Entity for users - holds a UUID, username */
   id INT NOT NULL AUTO_INCREMENT,
-  userid INT,
+  userid BIGINT,
   username varchar(15),
   Primary KEY (id)
 );
