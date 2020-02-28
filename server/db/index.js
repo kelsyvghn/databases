@@ -9,8 +9,8 @@ var mysql = require('mysql');
 //added below according to mysql docs
 var db = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: '',
+  user: 'student',
+  password: 'student',
   database: 'chat'
 });
 
@@ -22,3 +22,5 @@ db.connect((err) => {
 });
 
 module.exports = db; //Client does not support authentication protocol requested
+
+// exports = db;
